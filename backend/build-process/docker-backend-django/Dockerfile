@@ -35,7 +35,7 @@ RUN sed -i 's/\r$//' /home/docker/scripts/boot.sh  && \
 
 
 
-COPY ./core /home/apibackend
+COPY ./backend /home/apibackend
 
 ENTRYPOINT /home/docker/scripts/boot.sh
 
