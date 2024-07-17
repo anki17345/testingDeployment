@@ -12,7 +12,7 @@ RUN apt-get update && \
         supervisor && \
     rm -rf /var/lib/apt/lists/*
 
-COPY ./django/requirements /home/apibackend/requirements
+COPY ./backend/requirements /home/apibackend/requirements
 RUN mkdir -p /home/apibackend/media
 WORKDIR /home/apibackend
 
@@ -27,15 +27,15 @@ EXPOSE 8000
 RUN mkdir -p /var/logs/apibackend
 
 
-COPY ./django/build-process/docker-backend-django/scripts /home/docker/scripts
-COPY ./django/build-process/docker-backend-django/config/supervisor-backend.conf /etc/supervisor/conf.d/supervisor-backend.conf
+COPY ./backend/build-process/docker-backend-django/scripts /home/docker/scripts
+COPY ./backend/build-process/docker-backend-django/config/supervisor-backend.conf /etc/supervisor/conf.d/supervisor-backend.conf
 
 RUN sed -i 's/\r$//' /home/docker/scripts/boot.sh  && \
         chmod +x /home/docker/scripts/boot.sh
 
 
 
-COPY ./django /home/apibackend
+COPY ./core /home/apibackend
 
 ENTRYPOINT /home/docker/scripts/boot.sh
 
